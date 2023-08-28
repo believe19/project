@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import FetchData from './FetchData'
+import CurrencyData from './CurrencyData'
+import LanguageData from './LanguageData'
+import CapitalData from './CapitalData'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import NavLinks from './NavLinks';
 
-function App() {
+
+
+
+
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element:<NavLinks/>,
+    errorElement: "page not found",
+    children:[
+      {
+        index: true,
+        element:<FetchData/>
+
+      },
+      {
+        path: "#",
+        element:<h1>PAGE NOT FOUND PLEASE RELOAD</h1>
+      },
+      {
+        path: "/Currency",
+        element:<CurrencyData/>,
+        errorElement: "page not found"
+      },
+      {
+        path: "/Language",
+        element:<LanguageData/>,
+        errorElement: "page not found"
+      },
+      {
+        path: "/Capital",
+        element:<CapitalData/>,
+        errorElement: "page not found"
+      },  
+    ]
+  },
+  
+])
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <RouterProvider router={router}/>
     </div>
   );
-}
+};
 
 export default App;
